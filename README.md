@@ -99,10 +99,10 @@ A Yorkie marketplace and forum built with Next.js, Supabase, and shadcn/ui.
 
 ## Brand Assets
 
-<p align="center">
-  <img src="assets/brand/yorkixchange-wordmark.svg" alt="YorkiXchange wordmark" width="320" />
-  <img src="assets/brand/yorkixchange-mark.svg" alt="YorkiXchange crest" width="140" />
-  <img src="assets/brand/yorkixchange-badge.svg" alt="YorkiXchange badge" width="160" />
-</p>
+| Asset | Preview | Path |
+| --- | --- | --- |
+| Wordmark | <img src="assets/brand/yorkixchange-wordmark.svg" alt="YorkiXchange wordmark" width="320" /> | `assets/brand/yorkixchange-wordmark.svg` |
+| Crest | <img src="assets/brand/yorkixchange-mark.svg" alt="YorkiXchange crest" width="140" /> | `assets/brand/yorkixchange-mark.svg` |
+| Badge | <img src="assets/brand/yorkixchange-badge.svg" alt="YorkiXchange badge" width="160" /> | `assets/brand/yorkixchange-badge.svg` |
 
 See `BRAND.md` and `/assets/brand/` for mascot, logo variants, and color palette. All assets are vector-based for crisp rendering in README and app UI.
