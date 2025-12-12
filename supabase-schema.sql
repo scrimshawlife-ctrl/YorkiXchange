@@ -30,6 +30,8 @@ create table if not exists public.profiles (
   display_name text not null check (char_length(display_name) >= 1 and char_length(display_name) <= 40),
   avatar_url text,
   bio text check (char_length(bio) <= 280),
+  is_admin boolean not null default false,
+  status text not null default 'active' check (status in ('active','banned')),
   created_at timestamptz not null default now(),
   updated_at timestamptz not null default now()
 );
@@ -40,6 +42,17 @@ begin
   new.updated_at = now();
   return new;
 end;
+$$;
+
+create or replace function public.is_admin()
+returns boolean
+language sql
+security definer
+stable
+as $$
+  select coalesce((
+    select is_admin from public.profiles where id = auth.uid()
+  ), false);
 $$;
 
 drop trigger if exists trg_profiles_updated_at on public.profiles;
@@ -109,6 +122,20 @@ create table if not exists public.favorites (
   created_at timestamptz not null default now(),
   primary key (user_id, listing_id)
 );
+
+-- ---------- search_preferences ----------
+create table if not exists public.search_preferences (
+  id uuid primary key default gen_random_uuid(),
+  user_id uuid not null references public.profiles(id) on delete cascade,
+  name text not null check (char_length(name) between 3 and 60),
+  query text not null default '',
+  category listing_category,
+  max_price_cents int check (max_price_cents is null or max_price_cents >= 0),
+  alerts_enabled boolean not null default false,
+  created_at timestamptz not null default now()
+);
+
+create index if not exists idx_search_preferences_user on public.search_preferences(user_id, created_at desc);
 
 -- ---------- forum ----------
 create table if not exists public.forum_categories (
@@ -188,17 +215,29 @@ create table if not exists public.reports (
   status text not null default 'open' check (status in ('open','reviewed','closed'))
 );
 
+create table if not exists public.admin_audit (
+  id uuid primary key default gen_random_uuid(),
+  actor_id uuid references public.profiles(id) on delete set null,
+  action text not null,
+  target_type text not null,
+  target_id uuid,
+  metadata jsonb default '{}'::jsonb,
+  created_at timestamptz not null default now()
+);
+
 -- ---------- RLS ----------
 alter table public.profiles enable row level security;
 alter table public.listings enable row level security;
 alter table public.listing_images enable row level security;
 alter table public.favorites enable row level security;
+alter table public.search_preferences enable row level security;
 alter table public.forum_categories enable row level security;
 alter table public.threads enable row level security;
 alter table public.comments enable row level security;
 alter table public.conversations enable row level security;
 alter table public.messages enable row level security;
 alter table public.reports enable row level security;
+alter table public.admin_audit enable row level security;
 
 -- profiles
 drop policy if exists "profiles_read_all" on public.profiles;
@@ -212,7 +251,14 @@ create policy "profiles_update_own"
 on public.profiles for update
 to authenticated
 using (auth.uid() = id)
-with check (auth.uid() = id);
+with check (auth.uid() = id and status = 'active');
+
+drop policy if exists "profiles_admin_override" on public.profiles;
+create policy "profiles_admin_override"
+on public.profiles for all
+to authenticated
+using (public.is_admin())
+with check (public.is_admin());
 
 -- listings
 drop policy if exists "listings_read_active" on public.listings;
@@ -239,6 +285,13 @@ create policy "listings_delete_own"
 on public.listings for delete
 to authenticated
 using (auth.uid() = user_id);
+
+drop policy if exists "listings_admin_override" on public.listings;
+create policy "listings_admin_override"
+on public.listings for all
+to authenticated
+using (public.is_admin())
+with check (public.is_admin());
 
 -- listing_images
 drop policy if exists "listing_images_read_public" on public.listing_images;
@@ -285,6 +338,32 @@ on public.favorites for delete
 to authenticated
 using (auth.uid() = user_id);
 
+-- search_preferences
+drop policy if exists "search_preferences_read_own" on public.search_preferences;
+create policy "search_preferences_read_own"
+on public.search_preferences for select
+to authenticated
+using (auth.uid() = user_id);
+
+drop policy if exists "search_preferences_insert_own" on public.search_preferences;
+create policy "search_preferences_insert_own"
+on public.search_preferences for insert
+to authenticated
+with check (auth.uid() = user_id);
+
+drop policy if exists "search_preferences_update_own" on public.search_preferences;
+create policy "search_preferences_update_own"
+on public.search_preferences for update
+to authenticated
+using (auth.uid() = user_id)
+with check (auth.uid() = user_id);
+
+drop policy if exists "search_preferences_delete_own" on public.search_preferences;
+create policy "search_preferences_delete_own"
+on public.search_preferences for delete
+to authenticated
+using (auth.uid() = user_id);
+
 -- forum_categories read all
 drop policy if exists "forum_categories_read_all" on public.forum_categories;
 create policy "forum_categories_read_all"
@@ -312,6 +391,13 @@ to authenticated
 using (auth.uid() = user_id and is_locked = false)
 with check (auth.uid() = user_id and is_locked = false);
 
+drop policy if exists "threads_admin_override" on public.threads;
+create policy "threads_admin_override"
+on public.threads for all
+to authenticated
+using (public.is_admin())
+with check (public.is_admin());
+
 -- comments
 drop policy if exists "comments_read_all" on public.comments;
 create policy "comments_read_all"
@@ -337,6 +423,13 @@ create policy "comments_delete_own"
 on public.comments for delete
 to authenticated
 using (auth.uid() = user_id);
+
+drop policy if exists "comments_admin_override" on public.comments;
+create policy "comments_admin_override"
+on public.comments for all
+to authenticated
+using (public.is_admin())
+with check (public.is_admin());
 
 -- conversations: participants only
 drop policy if exists "conversations_select_participants" on public.conversations;
@@ -390,6 +483,19 @@ on public.reports for select
 to authenticated
 using (auth.uid() = reporter_id);
 
+drop policy if exists "reports_admin_all" on public.reports;
+create policy "reports_admin_all"
+on public.reports for all
+to authenticated
+using (public.is_admin())
+with check (public.is_admin());
+
+drop policy if exists "admin_audit_admin_read" on public.admin_audit;
+create policy "admin_audit_admin_read"
+on public.admin_audit for select
+to authenticated
+using (public.is_admin());
+
 -- ---------- STORAGE (avatars + listing images) ----------
 -- Create buckets in Storage UI:
 -- 1) avatars (public)
@@ -437,6 +543,7 @@ using (
 );
 
 -- Listing images: anyone can read; listing owner can write under folder listing_id/*
+-- Use UUID filenames to avoid overwriting existing images.
 drop policy if exists "listing_images_read_public_bucket" on storage.objects;
 create policy "listing_images_read_public_bucket"
 on storage.objects for select
