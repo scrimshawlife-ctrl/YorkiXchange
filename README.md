@@ -46,10 +46,19 @@ A Yorkie marketplace and forum built with Next.js, Supabase, and shadcn/ui.
   - Message seller from listing detail
   - Inbox with conversation list
   - Thread view with live message updates
-- ✅ Forum categories display
+- ✅ Settings & Profile
+  - Edit username, display name, and bio
+  - Avatar upload to Supabase Storage (avatars bucket)
+  - Profile picture with fallback initials
+- ✅ Forum System
+  - Browse categories
+  - View threads in category
+  - Create new threads
+  - Thread detail with comments
+  - Post comments on threads
+  - Locked thread support
 - ✅ RLS-secured database with profiles, listings, favorites, threads, comments, messages
-- 🚧 Image uploads for listings and avatars (next drop)
-- 🚧 Forum thread creation and comments (next drop)
+- 🚧 Listing image uploads (next drop)
 
 ## Tech Stack
 

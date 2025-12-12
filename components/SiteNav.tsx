@@ -61,6 +61,7 @@ export default function SiteNav() {
           <Link className="text-sm hover:underline" href="/market">Market</Link>
           <Link className="text-sm hover:underline" href="/forum">Forum</Link>
           {session ? <Link className="text-sm hover:underline" href="/inbox">Inbox</Link> : null}
+          {session ? <Link className="text-sm hover:underline" href="/settings">Settings</Link> : null}
 
           {session ? (
             <div className="flex items-center gap-2">
