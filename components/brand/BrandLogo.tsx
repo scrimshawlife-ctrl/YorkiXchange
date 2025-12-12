@@ -16,12 +16,12 @@ export function BrandLogo({
   const getSvgPath = () => {
     switch (variant) {
       case "badge":
-        return "/assets/brand/yorkixchange-badge.svg";
+        return "/assets/brand/yorkiexchange-badge.svg";
       case "mark":
-        return "/assets/brand/yorkixchange-mark.svg";
+        return "/assets/brand/yorkiexchange-mark.svg";
       case "wordmark":
       default:
-        return "/assets/brand/yorkixchange-wordmark.svg";
+        return "/assets/brand/yorkiexchange-wordmark.svg";
     }
   };
 

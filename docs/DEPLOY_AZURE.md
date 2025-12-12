@@ -23,14 +23,14 @@
    - `supabaseServiceRoleKey` (stored as a Container App secret)
 3. Build and push the Docker image:
    ```bash
-   az acr build --registry <registryName> --image yorkixchange:latest .
+   az acr build --registry <registryName> --image yorkiexchange:latest .
    ```
 4. Deploy the latest image to the Container App:
    ```bash
    az containerapp update \
-     --name yorkixchange-app \
+     --name yorkiexchange-app \
      --resource-group <resourceGroup> \
-     --image <registryName>.azurecr.io/yorkixchange:latest
+     --image <registryName>.azurecr.io/yorkiexchange:latest
    ```
 
 ## Deploy to Azure button
