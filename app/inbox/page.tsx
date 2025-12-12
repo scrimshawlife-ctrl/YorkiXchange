@@ -4,6 +4,7 @@ import Link from "next/link";
 import { useEffect, useState } from "react";
 import { supabase } from "@/lib/supabase/client";
 import { Card, CardHeader, CardContent } from "@/components/ui/card";
+import { EmptyState } from "@/components/brand/EmptyState";
 import { toast } from "sonner";
 
 type Row = any;
@@ -95,7 +96,13 @@ export default function InboxPage() {
       {busy ? (
         <div className="text-sm text-muted-foreground">Loading…</div>
       ) : rows.length === 0 ? (
-        <div className="text-sm text-muted-foreground">No conversations yet.</div>
+        <EmptyState
+          title="No messages yet"
+          description="Start a conversation by messaging a seller from a listing page. Your conversations will appear here."
+          actionLabel="Browse Marketplace"
+          actionHref="/market"
+          mascotMessage="Your inbox is empty! Visit the marketplace to start chatting with sellers."
+        />
       ) : (
         <div className="grid gap-3">
           {rows.map((c) => (

@@ -4,8 +4,11 @@ import { Toaster } from "@/components/ui/sonner";
 import SiteNav from "@/components/SiteNav";
 
 export const metadata: Metadata = {
-  title: "YorkiXchange",
-  description: "Yorkie marketplace + forum",
+  title: "YorkiXchange - Marketplace",
+  description: "The friendly marketplace and community for Yorkie lovers. Buy, sell, adopt, and connect with fellow Yorkshire Terrier enthusiasts.",
+  icons: {
+    icon: "/assets/brand/favicon.svg",
+  },
 };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {

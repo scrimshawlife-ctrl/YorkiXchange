@@ -6,6 +6,7 @@ import { useParams } from "next/navigation";
 import { supabase } from "@/lib/supabase/client";
 import { Button } from "@/components/ui/button";
 import { Card, CardHeader, CardContent } from "@/components/ui/card";
+import { EmptyState } from "@/components/brand/EmptyState";
 import { toast } from "sonner";
 
 type Thread = any;
@@ -67,7 +68,13 @@ export default function CategoryPage() {
       {busy ? (
         <div className="text-sm text-muted-foreground">Loading threads…</div>
       ) : threads.length === 0 ? (
-        <div className="text-sm text-muted-foreground">No threads yet. Start a discussion!</div>
+        <EmptyState
+          title="No threads yet"
+          description="Be the first to start a discussion in this category! Share your thoughts, ask questions, or help others."
+          actionLabel="Start New Thread"
+          actionHref={`/forum/c/${slug}/new`}
+          mascotMessage="This category is quiet! Start a conversation and bring the community together."
+        />
       ) : (
         <div className="grid gap-3">
           {threads.map((t) => (

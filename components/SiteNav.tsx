@@ -5,6 +5,7 @@ import { useEffect, useState } from "react";
 import { supabase } from "@/lib/supabase/client";
 import { Button } from "@/components/ui/button";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
+import { BrandLogo } from "@/components/brand/BrandLogo";
 
 type Profile = { username: string; display_name: string; avatar_url: string | null };
 
@@ -53,8 +54,13 @@ export default function SiteNav() {
   return (
     <header className="border-b">
       <div className="mx-auto flex max-w-6xl items-center justify-between px-4 py-3">
-        <Link href="/" className="font-semibold tracking-tight">
-          YorkiXchange
+        <Link href="/" className="flex items-center">
+          <span className="hidden sm:block">
+            <BrandLogo variant="wordmark" size={28} />
+          </span>
+          <span className="block sm:hidden">
+            <BrandLogo variant="mark" size={32} />
+          </span>
         </Link>
 
         <nav className="flex items-center gap-3">

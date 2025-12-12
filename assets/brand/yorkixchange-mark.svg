@@ -1,0 +1,53 @@
+<svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+  <title>YorkiXchange Mark</title>
+
+  <defs>
+    <radialGradient id="markCoralBg" cx="50%" cy="40%">
+      <stop offset="0%" style="stop-color:#FF8B7E;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#FF6B6B;stop-opacity:1" />
+    </radialGradient>
+    <linearGradient id="markFurFill" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" style="stop-color:#F6E9D8;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#C4A574;stop-opacity:1" />
+    </linearGradient>
+  </defs>
+
+  <!-- Background circle with coral gradient -->
+  <circle cx="50" cy="50" r="48" fill="url(#markCoralBg)"/>
+
+  <!-- Left ear -->
+  <ellipse cx="28" cy="38" rx="12" ry="16" fill="#C4A574" stroke="#1F2328" stroke-width="2.5"/>
+  <ellipse cx="28" cy="40" rx="7" ry="10" fill="#8B6F47"/>
+
+  <!-- Right ear -->
+  <ellipse cx="72" cy="38" rx="12" ry="16" fill="#C4A574" stroke="#1F2328" stroke-width="2.5"/>
+  <ellipse cx="72" cy="40" rx="7" ry="10" fill="#8B6F47"/>
+
+  <!-- Head (main circle) -->
+  <circle cx="50" cy="48" r="28" fill="url(#markFurFill)" stroke="#1F2328" stroke-width="2.5"/>
+
+  <!-- Fur highlights -->
+  <path d="M 40 38 Q 42 35 44 38" fill="none" stroke="#F6E9D8" stroke-width="1.5" stroke-linecap="round"/>
+  <path d="M 56 38 Q 58 35 60 38" fill="none" stroke="#F6E9D8" stroke-width="1.5" stroke-linecap="round"/>
+
+  <!-- Muzzle area (lighter cream) -->
+  <ellipse cx="50" cy="54" rx="16" ry="13" fill="#F6E9D8"/>
+
+  <!-- Left eye -->
+  <circle cx="42" cy="48" r="5" fill="#1F2328"/>
+  <circle cx="43.5" cy="46" r="2" fill="#FFFFFF"/>
+
+  <!-- Right eye -->
+  <circle cx="58" cy="48" r="5" fill="#1F2328"/>
+  <circle cx="59.5" cy="46" r="2" fill="#FFFFFF"/>
+
+  <!-- Nose -->
+  <ellipse cx="50" cy="58" rx="3" ry="2.5" fill="#1F2328"/>
+
+  <!-- Smile -->
+  <path d="M 46 62 Q 50 65 54 62" fill="none" stroke="#1F2328" stroke-width="2" stroke-linecap="round"/>
+
+  <!-- Fur texture strokes -->
+  <path d="M 32 50 Q 35 53 32 56" fill="none" stroke="#8B6F47" stroke-width="1.5" opacity="0.6"/>
+  <path d="M 68 50 Q 65 53 68 56" fill="none" stroke="#8B6F47" stroke-width="1.5" opacity="0.6"/>
+</svg>

@@ -1,0 +1,37 @@
+<svg viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg">
+  <title>YorkiXchange Favicon</title>
+
+  <defs>
+    <radialGradient id="favCoralBg" cx="50%" cy="40%">
+      <stop offset="0%" style="stop-color:#FF8B7E;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#FF6B6B;stop-opacity:1" />
+    </radialGradient>
+  </defs>
+
+  <!-- Background -->
+  <rect width="64" height="64" rx="12" fill="url(#favCoralBg)"/>
+
+  <!-- Simplified yorkie face for small sizes -->
+  <!-- Left ear -->
+  <ellipse cx="20" cy="24" rx="8" ry="10" fill="#C4A574" stroke="#1F2328" stroke-width="2"/>
+
+  <!-- Right ear -->
+  <ellipse cx="44" cy="24" rx="8" ry="10" fill="#C4A574" stroke="#1F2328" stroke-width="2"/>
+
+  <!-- Head -->
+  <circle cx="32" cy="32" r="18" fill="#F6E9D8" stroke="#1F2328" stroke-width="2"/>
+
+  <!-- Left eye -->
+  <circle cx="26" cy="30" r="3.5" fill="#1F2328"/>
+  <circle cx="27" cy="29" r="1.2" fill="#FFFFFF"/>
+
+  <!-- Right eye -->
+  <circle cx="38" cy="30" r="3.5" fill="#1F2328"/>
+  <circle cx="39" cy="29" r="1.2" fill="#FFFFFF"/>
+
+  <!-- Nose -->
+  <ellipse cx="32" cy="36" rx="2" ry="1.5" fill="#1F2328"/>
+
+  <!-- Smile -->
+  <path d="M 29 40 Q 32 42 35 40" fill="none" stroke="#1F2328" stroke-width="1.5" stroke-linecap="round"/>
+</svg>

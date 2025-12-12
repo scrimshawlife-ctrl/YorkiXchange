@@ -6,6 +6,7 @@ import { supabase } from "@/lib/supabase/client";
 import ListingCard from "@/components/ListingCard";
 import SearchFilters, { Filters } from "@/components/SearchFilters";
 import { Button } from "@/components/ui/button";
+import { EmptyState } from "@/components/brand/EmptyState";
 import { toast } from "sonner";
 
 type Listing = {
@@ -72,7 +73,13 @@ export default function MarketPage() {
       {busy ? (
         <div className="text-sm text-muted-foreground">Loading listings...</div>
       ) : items.length === 0 ? (
-        <div className="text-sm text-muted-foreground">No listings found.</div>
+        <EmptyState
+          title="No listings found"
+          description="No active listings match your search criteria. Try adjusting your filters or be the first to post!"
+          actionLabel="Post a Listing"
+          actionHref="/market/new"
+          mascotMessage="Woof! The marketplace is looking empty. Be the first to post!"
+        />
       ) : (
         <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
           {items.map((l) => (

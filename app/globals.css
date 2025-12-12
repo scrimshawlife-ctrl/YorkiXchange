@@ -24,6 +24,15 @@
     --input: 0 0% 89.8%;
     --ring: 0 0% 3.9%;
     --radius: 0.5rem;
+
+    /* YorkiXchange brand colors */
+    --yorkix-charcoal: #1F2328;
+    --yorkix-cream: #F6E9D8;
+    --yorkix-tan: #C4A574;
+    --yorkix-tan-dark: #8B6F47;
+    --yorkix-coral: #FF6B6B;
+    --yorkix-coral-light: #FF8B7E;
+    --yorkix-gray: #5F6770;
   }
 
   .dark {

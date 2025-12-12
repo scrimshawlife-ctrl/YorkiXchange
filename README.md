@@ -62,6 +62,13 @@ A Yorkie marketplace and forum built with Next.js, Supabase, and shadcn/ui.
   - Multi-image upload to Supabase Storage (listing-images bucket)
   - Image gallery component with modal lightbox
   - Navigation controls (prev/next) in full-size view
+- ✅ Brand Kit & Design System
+  - Custom YorkiXchange mascot and logo system
+  - Badge, wordmark, and mark variants (SVG)
+  - yorkix color palette (coral, cream, tan, charcoal)
+  - Reusable brand components (BrandLogo, MascotBubble, EmptyState)
+  - Responsive navigation (wordmark on desktop, mark on mobile)
+  - Friendly empty states with mascot integration
 
 ## Tech Stack
 
@@ -75,4 +82,13 @@ A Yorkie marketplace and forum built with Next.js, Supabase, and shadcn/ui.
 - Row Level Security (RLS) enforces all data access policies
 - Profiles auto-created on signup via database trigger
 - Responsive design, mobile-first
-- Type-safe with TypeScript throughout 
+- Type-safe with TypeScript throughout
+
+## Brand Assets
+
+See `BRAND.md` for complete brand guidelines, color palette, and component usage.
+
+**Brand Files:**
+- `/assets/brand/` - SVG logo files (badge, wordmark, mark, favicon)
+- `/components/brand/` - React components (BrandLogo, MascotBubble, EmptyState)
+- Tailwind `yorkix` color palette for consistent theming 
