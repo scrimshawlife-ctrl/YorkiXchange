@@ -9,19 +9,40 @@ import { Card, CardHeader, CardContent } from "@/components/ui/card";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { toast } from "sonner";
 
+type SavedSearch = {
+  id: string;
+  name: string;
+  query: string;
+  category: string | null;
+  max_price_cents: number | null;
+  alerts_enabled: boolean;
+};
+
 export default function SettingsPage() {
   const [session, setSession] = useState<any>(null);
+  const [authChecked, setAuthChecked] = useState(false);
   const [profile, setProfile] = useState<any>(null);
   const [busy, setBusy] = useState(true);
   const [saveBusy, setSaveBusy] = useState(false);
   const [uploadBusy, setUploadBusy] = useState(false);
+  const [savedSearches, setSavedSearches] = useState<SavedSearch[]>([]);
 
   const [username, setUsername] = useState("");
   const [displayName, setDisplayName] = useState("");
   const [bio, setBio] = useState("");
 
   useEffect(() => {
-    supabase.auth.getSession().then(({ data }) => setSession(data.session ?? null));
+    supabase.auth.getSession().then(({ data }) => {
+      setSession(data.session ?? null);
+      setAuthChecked(true);
+    });
+
+    const { data: listener } = supabase.auth.onAuthStateChange((_, nextSession) => {
+      setSession(nextSession ?? null);
+      setAuthChecked(true);
+    });
+
+    return () => listener?.subscription.unsubscribe();
   }, []);
 
   useEffect(() => {
@@ -48,6 +69,29 @@ export default function SettingsPage() {
     };
 
     load();
+  }, [session?.user?.id]);
+
+  useEffect(() => {
+    const loadSearches = async () => {
+      if (!session?.user?.id) {
+        setSavedSearches([]);
+        return;
+      }
+
+      const { data, error } = await supabase
+        .from("search_preferences")
+        .select("id,name,query,category,max_price_cents,alerts_enabled")
+        .order("created_at", { ascending: false });
+
+      if (error) {
+        toast.error(error.message);
+        return;
+      }
+
+      setSavedSearches((data as SavedSearch[]) ?? []);
+    };
+
+    void loadSearches();
   }, [session?.user?.id]);
 
   const saveProfile = async () => {
@@ -117,6 +161,42 @@ export default function SettingsPage() {
       setProfile({ ...profile, avatar_url: urlData.publicUrl });
     }
   };
+
+  const toggleAlert = async (pref: SavedSearch) => {
+    const { data, error } = await supabase
+      .from("search_preferences")
+      .update({ alerts_enabled: !pref.alerts_enabled })
+      .eq("id", pref.id)
+      .select("id,name,query,category,max_price_cents,alerts_enabled")
+      .single();
+
+    if (error) {
+      toast.error(error.message);
+      return;
+    }
+
+    setSavedSearches((prev) => prev.map((p) => (p.id === pref.id ? (data as SavedSearch) : p)));
+    toast.success(`Alerts ${!pref.alerts_enabled ? "enabled" : "disabled"} for ${pref.name}.`);
+  };
+
+  const deleteSearch = async (pref: SavedSearch) => {
+    const confirmed = window.confirm(`Delete saved search "${pref.name}"?`);
+    if (!confirmed) return;
+
+    const { error } = await supabase.from("search_preferences").delete().eq("id", pref.id);
+
+    if (error) {
+      toast.error(error.message);
+      return;
+    }
+
+    setSavedSearches((prev) => prev.filter((p) => p.id !== pref.id));
+    toast.success("Saved search deleted.");
+  };
+
+  if (!authChecked) {
+    return <div className="text-sm text-muted-foreground">Checking session…</div>;
+  }
 
   if (!session) {
     return <div className="text-sm text-muted-foreground">Log in to edit your profile.</div>;
@@ -199,6 +279,43 @@ export default function SettingsPage() {
           <Button className="w-full" onClick={saveProfile} disabled={saveBusy}>
             {saveBusy ? "Saving…" : "Save Profile"}
           </Button>
+        </CardContent>
+      </Card>
+
+      <Card>
+        <CardHeader className="font-medium">Saved Searches & Alerts</CardHeader>
+        <CardContent className="space-y-3 text-sm">
+          {savedSearches.length === 0 ? (
+            <div className="text-muted-foreground">
+              You haven't saved any searches yet. Save a filter set from the marketplace to enable alerts.
+            </div>
+          ) : (
+            <div className="space-y-2">
+              {savedSearches.map((pref) => (
+                <div
+                  key={pref.id}
+                  className="flex flex-col gap-1 rounded-md border bg-muted/40 p-3 sm:flex-row sm:items-center sm:justify-between"
+                >
+                  <div>
+                    <div className="font-medium">{pref.name}</div>
+                    <div className="text-xs text-muted-foreground">
+                      {pref.query ? `“${pref.query}” · ` : ""}
+                      {pref.category ?? "all"}
+                      {pref.max_price_cents ? ` · Under $${(pref.max_price_cents / 100).toFixed(0)}` : ""}
+                    </div>
+                  </div>
+                  <div className="flex items-center gap-2">
+                    <Button variant="outline" size="sm" onClick={() => toggleAlert(pref)}>
+                      {pref.alerts_enabled ? "Disable alerts" : "Enable alerts"}
+                    </Button>
+                    <Button variant="ghost" size="sm" onClick={() => deleteSearch(pref)}>
+                      Delete
+                    </Button>
+                  </div>
+                </div>
+              ))}
+            </div>
+          )}
         </CardContent>
       </Card>
     </div>
