@@ -1,0 +1,161 @@
+{
+  "$schema": "https://schema.management.azure.com/schemas/2019-04-01/deploymentTemplate.json#",
+  "contentVersion": "1.0.0.0",
+  "parameters": {
+    "location": {
+      "type": "string",
+      "defaultValue": "[resourceGroup().location]"
+    },
+    "containerAppName": {
+      "type": "string",
+      "defaultValue": "yorkixchange-app"
+    },
+    "environmentName": {
+      "type": "string",
+      "defaultValue": "yorkixchange-env"
+    },
+    "containerRegistryName": {
+      "type": "string",
+      "defaultValue": "yorkixchangeacr"
+    },
+    "imageName": {
+      "type": "string",
+      "defaultValue": "yorkixchange:latest"
+    },
+    "nextPublicSupabaseUrl": {
+      "type": "string"
+    },
+    "nextPublicSupabaseAnonKey": {
+      "type": "string"
+    },
+    "nextPublicSiteUrl": {
+      "type": "string"
+    },
+    "nextPublicAppEnv": {
+      "type": "string",
+      "defaultValue": "production"
+    },
+    "supabaseServiceRoleKey": {
+      "type": "securestring"
+    }
+  },
+  "variables": {
+    "acrId": "[resourceId('Microsoft.ContainerRegistry/registries', parameters('containerRegistryName'))]",
+    "acrCredentials": "[listCredentials(variables('acrId'), '2023-01-01-preview')]",
+    "acrServer": "[concat(parameters('containerRegistryName'), '.azurecr.io')]"
+  },
+  "resources": [
+    {
+      "type": "Microsoft.ContainerRegistry/registries",
+      "apiVersion": "2023-01-01-preview",
+      "name": "[parameters('containerRegistryName')]",
+      "location": "[parameters('location')]",
+      "sku": {
+        "name": "Basic"
+      },
+      "properties": {
+        "adminUserEnabled": true,
+        "publicNetworkAccess": "Enabled"
+      }
+    },
+    {
+      "type": "Microsoft.App/managedEnvironments",
+      "apiVersion": "2024-02-01-preview",
+      "name": "[parameters('environmentName')]",
+      "location": "[parameters('location')]",
+      "properties": {
+        "appLogsConfiguration": {
+          "destination": "log-analytics",
+          "logAnalyticsConfiguration": {
+            "customerId": "",
+            "sharedKey": ""
+          }
+        }
+      }
+    },
+    {
+      "type": "Microsoft.App/containerApps",
+      "apiVersion": "2024-02-01-preview",
+      "name": "[parameters('containerAppName')]",
+      "location": "[parameters('location')]",
+      "dependsOn": [
+        "[variables('acrId')]",
+        "[resourceId('Microsoft.App/managedEnvironments', parameters('environmentName'))]"
+      ],
+      "properties": {
+        "managedEnvironmentId": "[resourceId('Microsoft.App/managedEnvironments', parameters('environmentName'))]",
+        "configuration": {
+          "ingress": {
+            "external": true,
+            "targetPort": 3000
+          },
+          "registries": [
+            {
+              "server": "[variables('acrServer')]",
+              "username": "[variables('acrCredentials').username]",
+              "passwordSecretRef": "acr-password"
+            }
+          ],
+          "secrets": [
+            {
+              "name": "acr-password",
+              "value": "[variables('acrCredentials').passwords[0].value]"
+            },
+            {
+              "name": "supabase-service-role-key",
+              "value": "[parameters('supabaseServiceRoleKey')]"
+            }
+          ],
+          "env": [
+            {
+              "name": "NEXT_PUBLIC_SUPABASE_URL",
+              "value": "[parameters('nextPublicSupabaseUrl')]"
+            },
+            {
+              "name": "NEXT_PUBLIC_SUPABASE_ANON_KEY",
+              "value": "[parameters('nextPublicSupabaseAnonKey')]"
+            },
+            {
+              "name": "NEXT_PUBLIC_SITE_URL",
+              "value": "[parameters('nextPublicSiteUrl')]"
+            },
+            {
+              "name": "NEXT_PUBLIC_APP_ENV",
+              "value": "[parameters('nextPublicAppEnv')]"
+            },
+            {
+              "name": "SUPABASE_SERVICE_ROLE_KEY",
+              "secretRef": "supabase-service-role-key"
+            }
+          ]
+        },
+        "template": {
+          "containers": [
+            {
+              "name": "yorkixchange",
+              "image": "[concat(variables('acrServer'), '/', parameters('imageName'))]",
+              "resources": {
+                "cpu": 0.5,
+                "memory": "1Gi"
+              }
+            }
+          ],
+          "scale": {
+            "minReplicas": 1,
+            "maxReplicas": 3
+          }
+        }
+      }
+    }
+  ],
+  "outputs": {
+    "registryName": {
+      "type": "string",
+      "value": "[parameters('containerRegistryName')]"
+    },
+    "containerAppEndpoint": {
+      "type": "string",
+      "value": "[reference(resourceId('Microsoft.App/containerApps', parameters('containerAppName')), '2024-02-01-preview').properties.configuration.ingress.fqdn]"
+    }
+  }
+}
