@@ -41,10 +41,13 @@ A Yorkie marketplace and forum built with Next.js, Supabase, and shadcn/ui.
 - ✅ User authentication (signup/login)
 - ✅ Marketplace listing browse with filters (category, price, search)
 - ✅ Create listings (text-only, images coming in next drop)
+- ✅ Listing detail pages with seller info
+- ✅ Messaging system with realtime updates
+  - Message seller from listing detail
+  - Inbox with conversation list
+  - Thread view with live message updates
 - ✅ Forum categories display
 - ✅ RLS-secured database with profiles, listings, favorites, threads, comments, messages
-- 🚧 Listing detail pages (next drop)
-- 🚧 Messaging system (next drop)
 - 🚧 Image uploads for listings and avatars (next drop)
 - 🚧 Forum thread creation and comments (next drop)
 
