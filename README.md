@@ -1,94 +1,244 @@
-# YorkiXchange v1
+<p align="center">
+  <img src="assets/header.svg" alt="YorkiXchange — Yorkie marketplace + forum" width="100%" />
+</p>
 
-A Yorkie marketplace and forum built with Next.js, Supabase, and shadcn/ui.
+<h1 align="center">YorkiXchange</h1>
 
-## Setup
+<p align="center">
+  <b>Yorkie marketplace + forum</b><br/>
+  A modern Craigslist-style marketplace for Yorkies &amp; Yorkie essentials — with profiles, messaging, and community threads.
+</p>
 
-1. **Install dependencies**:
-   ```bash
-   npm install
-   ```
+<p align="center">
+  <a href="https://nextjs.org/">
+    <img alt="Next.js" src="https://img.shields.io/badge/Next.js-App%20Router-black" />
+  </a>
+  <a href="https://www.typescriptlang.org/">
+    <img alt="TypeScript" src="https://img.shields.io/badge/TypeScript-Strict-blue" />
+  </a>
+  <a href="https://tailwindcss.com/">
+    <img alt="Tailwind" src="https://img.shields.io/badge/TailwindCSS-UI-38B2AC" />
+  </a>
+  <a href="https://ui.shadcn.com/">
+    <img alt="shadcn/ui" src="https://img.shields.io/badge/shadcn%2Fui-Components-111827" />
+  </a>
+  <a href="https://supabase.com/">
+    <img alt="Supabase" src="https://img.shields.io/badge/Supabase-Auth%20%7C%20DB%20%7C%20Storage-3ECF8E" />
+  </a>
+  <a href="./LICENSE">
+    <img alt="License" src="https://img.shields.io/badge/License-MIT-green" />
+  </a>
+  <a href="./.github/workflows/ci.yml">
+    <img alt="CI" src="https://img.shields.io/badge/CI-GitHub%20Actions-inactive" />
+  </a>
+  <img alt="Mobile friendly" src="https://img.shields.io/badge/Mobile-Friendly-ff69b4" />
+</p>
 
-2. **Configure Supabase**:
-   - Create a Supabase project at https://supabase.com
-   - Run the SQL in `supabase-schema.sql` in your Supabase SQL Editor
-   - Create storage buckets:
-     - `avatars` (public)
-     - `listing-images` (public)
-   - Enable Email auth provider in Authentication settings
+<p align="center">
+  <a href="#features">Features</a> ·
+  <a href="#quickstart">Quickstart</a> ·
+  <a href="#environment-variables">Env</a> ·
+  <a href="#deployment">Deployment</a> ·
+  <a href="#brand-assets">Brand</a> ·
+  <a href="#architecture--data">Architecture</a> ·
+  <a href="#roadmap">Roadmap</a>
+</p>
 
-3. **Environment variables**:
-   - Copy `.env.local.example` to `.env.local`
-   - Fill in your Supabase URL and anon key:
-     ```
-     NEXT_PUBLIC_SUPABASE_URL=your_url_here
-     NEXT_PUBLIC_SUPABASE_ANON_KEY=your_anon_key_here
-     ```
+---
 
-4. **Run dev server**:
-   ```bash
-   npm run dev
-   ```
+## Brand assets
 
-5. **Build for production**:
-   ```bash
-   npm run build
-   npm start
-   ```
+<table>
+  <tr>
+    <td align="center">
+      <img src="assets/brand/yorkixchange-wordmark.svg" alt="YorkiXchange wordmark" width="320" /><br/>
+      <sub>Wordmark · `assets/brand/yorkixchange-wordmark.svg`</sub>
+    </td>
+    <td align="center">
+      <img src="assets/brand/yorkixchange-mark.svg" alt="YorkiXchange crest" width="140" /><br/>
+      <sub>Crest · `assets/brand/yorkixchange-mark.svg`</sub>
+    </td>
+    <td align="center">
+      <img src="assets/brand/yorkixchange-badge.svg" alt="YorkiXchange badge" width="160" /><br/>
+      <sub>Badge · `assets/brand/yorkixchange-badge.svg`</sub>
+    </td>
+  </tr>
+</table>
 
-## Features (v1)
+All assets are vector-based for crisp rendering in README and app UI. See `BRAND.md` and `/assets/brand/` for mascot, logo variants, and color palette.
 
-- ✅ User authentication (signup/login)
-- ✅ Marketplace listing browse with filters (category, price, search)
-- ✅ Create listings with multi-image upload (max 6 images, 5MB each)
-- ✅ Listing detail pages with seller info
-- ✅ Messaging system with realtime updates
-  - Message seller from listing detail
-  - Inbox with conversation list
-  - Thread view with live message updates
-- ✅ Settings & Profile
-  - Edit username, display name, and bio
-  - Avatar upload to Supabase Storage (avatars bucket)
-  - Profile picture with fallback initials
-- ✅ Forum System
-  - Browse categories
-  - View threads in category
-  - Create new threads
-  - Thread detail with comments
-  - Post comments on threads
-  - Locked thread support
-- ✅ RLS-secured database with profiles, listings, favorites, threads, comments, messages
-- ✅ Listing image uploads with gallery viewer
-  - Multi-image upload to Supabase Storage (listing-images bucket)
-  - Image gallery component with modal lightbox
-  - Navigation controls (prev/next) in full-size view
-- ✅ Brand Kit & Design System
-  - Custom YorkiXchange mascot and logo system
-  - Badge, wordmark, and mark variants (SVG)
-  - yorkix color palette (coral, cream, tan, charcoal)
-  - Reusable brand components (BrandLogo, MascotBubble, EmptyState)
-  - Responsive navigation (wordmark on desktop, mark on mobile)
-  - Friendly empty states with mascot integration
+---
 
-## Tech Stack
+## Features
 
-- **Frontend**: Next.js 15 (App Router), React 19, TypeScript
-- **UI**: shadcn/ui + Tailwind CSS
-- **Backend**: Supabase (PostgreSQL + Auth + Storage + RLS)
-- **Toast notifications**: Sonner
+<table>
+  <tr>
+    <td valign="top" width="50%">
+      <h3>Marketplace</h3>
+      <ul>
+        <li>Create/edit listings (Yorkies, rehomes, services, accessories)</li>
+        <li>Search + filters + favorites</li>
+        <li>Multi-image listings (max 6 images, 5MB each)</li>
+        <li>Report listings &amp; basic moderation hooks</li>
+      </ul>
+    </td>
+    <td valign="top" width="50%">
+      <h3>Community</h3>
+      <ul>
+        <li>Forum categories → threads → comments</li>
+        <li>User profiles + custom avatars</li>
+        <li>Direct messaging (buyer ↔ seller) + optional realtime</li>
+        <li>Admin console for reports / threads / listings</li>
+      </ul>
+    </td>
+  </tr>
+</table>
 
-## Architecture
+---
 
-- Row Level Security (RLS) enforces all data access policies
-- Profiles auto-created on signup via database trigger
-- Responsive design, mobile-first
-- Type-safe with TypeScript throughout
+## Screens
 
-## Brand Assets
+> Designed mobile-first. Nav collapses cleanly on small screens.
 
-See `BRAND.md` for complete brand guidelines, color palette, and component usage.
+| Route | Purpose |
+|---|---|
+| `/` | Home (featured + quick search) |
+| `/market` | Browse listings |
+| `/market/new` | Create listing |
+| `/market/[id]` | Listing detail + message seller |
+| `/forum` | Forum categories |
+| `/forum/c/[slug]` | Threads list |
+| `/forum/t/[id]` | Thread detail |
+| `/inbox` | Conversations |
+| `/inbox/[id]` | Message thread |
+| `/profile/[username]` | Profile |
+| `/settings` | Avatar + preferences |
+| `/admin` | Admin console (admin only) |
 
-**Brand Files:**
-- `/assets/brand/` - SVG logo files (badge, wordmark, mark, favicon)
-- `/components/brand/` - React components (BrandLogo, MascotBubble, EmptyState)
-- Tailwind `yorkix` color palette for consistent theming 
+---
+
+## Quickstart
+
+### 1) Install
+
+```bash
+npm install
+```
+
+### 2) Create a Supabase project
+- Create a new Supabase project
+- Enable Email auth provider
+
+### 3) Create tables + RLS
+Run the schema in Supabase SQL Editor:
+- `supabase-schema.sql`
+
+### 4) Create Storage buckets
+In Supabase Storage, create public buckets:
+- `avatars`
+- `listing-images`
+
+Public-read is fine as long as write permissions are locked by Storage policies.
+
+### 5) Environment variables
+Create .env.local (copy from .env.local.example) and set the public keys:
+
+```
+NEXT_PUBLIC_SUPABASE_URL=https://<PROJECT_REF>.supabase.co
+NEXT_PUBLIC_SUPABASE_ANON_KEY=<SUPABASE_PUBLIC_ANON_KEY>
+```
+
+On hosting providers, set server-side env vars for auth and admin routes:
+
+- `NEXT_PUBLIC_SITE_URL` – the deployed hostname (e.g., https://your-app.onrender.com)
+- `NEXT_PUBLIC_APP_ENV` – `production` in hosted environments
+- `SUPABASE_SERVICE_ROLE_KEY` – server-only; required for admin API routes and audits
+
+> Builds and CI expect these env vars to be present; run `npm run check-env` before `npm run build` to verify your shell is exporting them.
+
+### 6) Run
+
+```bash
+npm run dev
+```
+
+Open: http://localhost:3000
+
+---
+
+## Environment Variables
+
+| Key | Required | Notes |
+| --- | --- | --- |
+| NEXT_PUBLIC_SUPABASE_URL | ✅ | Supabase Project URL |
+| NEXT_PUBLIC_SUPABASE_ANON_KEY | ✅ | Public anon key |
+| NEXT_PUBLIC_SITE_URL | Recommended | Used for auth redirects; set in hosting env |
+| NEXT_PUBLIC_APP_ENV | Recommended | `production` in hosted envs |
+| SUPABASE_SERVICE_ROLE_KEY | ⚠️ | Server-only (admin APIs, jobs). Never expose to client. |
+| NEXT_PUBLIC_BUILD_ID | ⛔️ | Optional provenance |
+| NEXT_PUBLIC_GIT_SHA | ⛔️ | Optional provenance |
+
+---
+
+## Deployment
+
+### Deploy to Render
+
+[![Deploy to Render](https://render.com/images/deploy-to-render-button.svg)](https://render.com/deploy?repo=<REPO_URL>)
+
+Replace `<REPO_URL>` with your GitHub repository (main branch). The blueprint uses `render.yaml` with Node runtime, `npm ci && npm run build`, and `npm run start`, and declares `NEXT_PUBLIC_SUPABASE_URL`, `NEXT_PUBLIC_SUPABASE_ANON_KEY`, `NEXT_PUBLIC_SITE_URL`, and `NEXT_PUBLIC_APP_ENV` placeholders so you can set them immediately. See [docs/DEPLOY_RENDER.md](docs/DEPLOY_RENDER.md) for env vars and post-deploy checks.
+
+### Deploy to Azure
+
+[![Deploy to Azure](https://aka.ms/deploytoazurebutton)](https://portal.azure.com/#create/Microsoft.Template/uri/https%3A%2F%2Fraw.githubusercontent.com%2F<OWNER>%2F<REPO>%2Fmain%2Finfra%2Fmain.json)
+
+The button uses the ARM template at `infra/main.json` to provision an App Service plan, registry, and containerized Web App. Replace `<OWNER>`/`<REPO>` with your GitHub path, or follow [docs/DEPLOY_AZURE.md](docs/DEPLOY_AZURE.md) to run `azd up` with the matching `infra/main.bicep` flow.
+
+---
+
+## Architecture &amp; Data
+- Stack: Next.js App Router + TypeScript + Tailwind + shadcn/ui + Supabase
+- Supabase provides: Auth, Postgres, Storage, Realtime (optional)
+- RLS is enabled on all tables; users can only mutate their own data
+- Messaging is scoped to conversation participants
+
+See [docs/ARCHITECTURE.md](docs/ARCHITECTURE.md) for table and storage details.
+
+---
+
+## Safety
+
+YorkiXchange is a Yorkie-specific marketplace. Listings must follow local laws and humane standards.
+- Report system supports moderation review
+- Admin console supports removals and locks
+- Avoid posting private contact info publicly
+
+See [docs/SECURITY.md](docs/SECURITY.md).
+
+---
+
+## Mobile readiness checklist
+- ✅ Tap targets ≥ 44px (buttons, dropdown triggers)
+- ✅ No horizontal scroll on iPhone widths
+- ✅ Nav collapses (no clipped menu items)
+- ✅ Forms use inputMode for numeric fields
+- ✅ Images are responsive and lazy-loaded
+- ✅ Empty states include clear next actions
+
+---
+
+## Roadmap
+- v1 (current): auth, profiles, marketplace, messaging, forum, admin console
+- v1.1: saved searches, notifications, reputation/badges, moderation queue
+- v2: enhanced location filtering, advanced admin tooling, verified sellers
+
+---
+
+<details>
+  <summary><b>Customize</b> (branding / assets)</summary>
+
+  • Header graphic path: `assets/header.svg`
+  • Brand kit notes: `BRAND.md`
+  • Mascot + logo components live in: `components/brand/`
+
+</details>

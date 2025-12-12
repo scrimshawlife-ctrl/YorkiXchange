@@ -5,8 +5,14 @@
   "scripts": {
     "dev": "next dev",
     "build": "next build",
-    "start": "next start",
-    "lint": "next lint"
+    "start": "next start -p ${PORT:-3000}",
+    "check-env": "node scripts/check-env.ts public",
+    "check-env:server": "node scripts/check-env.ts server",
+    "lint": "next lint",
+    "typecheck": "tsc -p tsconfig.json --noEmit"
+  },
+  "engines": {
+    "node": ">=20.11.0"
   },
   "dependencies": {
     "@radix-ui/react-avatar": "^1.1.11",
