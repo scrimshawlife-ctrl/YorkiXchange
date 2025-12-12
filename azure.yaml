@@ -1,0 +1,28 @@
+name: yorkixchange
+metadata:
+  template: azure.yaml
+services:
+  web:
+    project: .
+    language: js
+    host: appservice
+    runCommand: npm run start
+    env:
+      - name: NEXT_PUBLIC_SUPABASE_URL
+        value: ""
+      - name: NEXT_PUBLIC_SUPABASE_ANON_KEY
+        value: ""
+      - name: NEXT_PUBLIC_SITE_URL
+        value: ""
+      - name: NEXT_PUBLIC_APP_ENV
+        value: "production"
+      - name: SUPABASE_SERVICE_ROLE_KEY
+        value: ""
+    hooks:
+      preprovision: []
+      postprovision: []
+      predeploy: []
+      postdeploy: []
+infra:
+  provider: "bicep"
+  path: "infra/main.bicep"
