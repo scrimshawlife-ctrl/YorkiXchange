@@ -1,0 +1,182 @@
+{
+  "version": "2.0.0",
+  "brandName": "YorkiExchange",
+  "microcopy": {
+    "buttons": {
+      "contact": "Contact",
+      "contactSeller": "Contact Seller",
+      "browsListings": "Browse Listings",
+      "postListing": "Post a Listing",
+      "verifyBreeder": "Verify Breeder",
+      "reportListing": "Report Listing",
+      "saveSearch": "Save Search",
+      "messageSeller": "Message Seller",
+      "viewProfile": "View Profile",
+      "editListing": "Edit Listing",
+      "rehomeResponsibly": "Rehome Responsibly",
+      "learnMore": "Learn More",
+      "getStarted": "Get Started",
+      "signUp": "Sign Up",
+      "logIn": "Log In",
+      "search": "Search",
+      "filter": "Filter Results",
+      "applyFilters": "Apply Filters",
+      "clearFilters": "Clear All"
+    },
+
+    "tooltips": {
+      "verifiedBreeder": "Verified breeders have confirmed their identity and credentials.",
+      "responseRate": "Response rate: Average time this seller replies to messages.",
+      "memberSince": "Member since: How long this user has been part of the YorkiExchange community.",
+      "trustScore": "Trust score based on community feedback, response rate, and verification status.",
+      "saveSearch": "Save this search to get notifications when new listings match your criteria.",
+      "reportListing": "Report this listing if it violates our community guidelines.",
+      "premiumBadge": "Premium members have enhanced profiles and priority support."
+    },
+
+    "emptyStates": {
+      "noListings": "No listings yet! Be the first to post.",
+      "noResults": "No Yorkies match your search. Try adjusting your filters.",
+      "noMessages": "Start a conversation by messaging a seller from a listing.",
+      "noSavedListings": "No saved listings yet. Browse available Yorkies to get started.",
+      "noSavedSearches": "Save searches to get alerts when new listings match your criteria.",
+      "noNotifications": "You're all caught up! No new notifications.",
+      "noReviews": "No reviews yet. Complete a transaction to leave feedback."
+    },
+
+    "formLabels": {
+      "email": "Email address",
+      "password": "Password",
+      "confirmPassword": "Confirm password",
+      "firstName": "First name",
+      "lastName": "Last name",
+      "location": "Location",
+      "zipCode": "ZIP code",
+      "phoneNumber": "Phone number (optional)",
+      "aboutYou": "About you",
+      "listingTitle": "Listing title",
+      "description": "Description",
+      "price": "Price",
+      "age": "Age",
+      "gender": "Gender",
+      "color": "Color",
+      "weight": "Weight (lbs)"
+    },
+
+    "formPlaceholders": {
+      "email": "you@example.com",
+      "password": "Create a secure password",
+      "location": "City, State or ZIP",
+      "listingTitle": "e.g., Adorable 8-week-old Yorkie puppy",
+      "description": "Share details about temperament, health, lineage, and more...",
+      "price": "1500",
+      "searchYorkies": "Search for Yorkies..."
+    },
+
+    "validation": {
+      "required": "This field is required.",
+      "emailInvalid": "Please enter a valid email address.",
+      "passwordTooShort": "Password must be at least 8 characters.",
+      "passwordMismatch": "Passwords don't match.",
+      "priceMustBeNumber": "Price must be a number.",
+      "ageMustBeNumber": "Age must be a number.",
+      "zipCodeInvalid": "Please enter a valid ZIP code."
+    },
+
+    "confirmations": {
+      "listingPublished": "Your listing is live! Potential adopters can now contact you.",
+      "messageSent": "Message sent! You'll be notified when the seller replies.",
+      "listingDeleted": "Your listing has been deleted.",
+      "listingReported": "Thank you for reporting. We'll review this listing within 24 hours.",
+      "profileUpdated": "Your profile has been updated.",
+      "searchSaved": "Search saved! You'll receive alerts for new matches."
+    },
+
+    "errors": {
+      "pageNotFound": "We couldn't find that page. Try browsing recent listings instead.",
+      "listingNotFound": "We couldn't find that listing. It may have been removed or sold.",
+      "connectionError": "We couldn't load this page. Check your connection and try again.",
+      "uploadFailed": "Image upload failed. Please try again or use a different file.",
+      "loginFailed": "Email or password incorrect. Please try again.",
+      "unauthorizedAction": "You don't have permission to do that.",
+      "rateLimited": "Too many requests. Please wait a moment and try again."
+    },
+
+    "moderation": {
+      "listingRemoved": "This listing was removed for violating community guidelines.",
+      "accountSuspended": "This account has been suspended.",
+      "contentFlagged": "This content has been flagged for review.",
+      "guidelinesLink": "Review our community guidelines",
+      "appealLink": "Submit an appeal"
+    },
+
+    "trust": {
+      "verifiedBadge": "Verified",
+      "premiumBadge": "Premium",
+      "responsiveLabel": "Responsive",
+      "newMemberLabel": "New Member",
+      "establishedLabel": "Established",
+      "topRatedLabel": "Top Rated",
+      "memberSincePrefix": "Member since",
+      "responseRatePrefix": "Response rate:",
+      "reviewCountSuffix": "reviews"
+    },
+
+    "listings": {
+      "postedLabel": "Posted",
+      "updatedLabel": "Updated",
+      "expiresLabel": "Expires",
+      "soldLabel": "SOLD",
+      "pendingLabel": "PENDING",
+      "availableLabel": "AVAILABLE",
+      "pricePrefix": "$",
+      "priceNegotiable": "Negotiable",
+      "contactForPrice": "Contact for price",
+      "ageWeeks": "weeks old",
+      "ageMonths": "months old",
+      "ageYears": "years old"
+    },
+
+    "navigation": {
+      "home": "Home",
+      "browse": "Browse",
+      "myListings": "My Listings",
+      "messages": "Messages",
+      "saved": "Saved",
+      "profile": "Profile",
+      "settings": "Settings",
+      "help": "Help",
+      "about": "About",
+      "guidelines": "Guidelines",
+      "privacy": "Privacy",
+      "terms": "Terms"
+    },
+
+    "filters": {
+      "allListings": "All Listings",
+      "availableOnly": "Available Only",
+      "verifiedOnly": "Verified Breeders Only",
+      "location": "Location",
+      "priceRange": "Price Range",
+      "ageRange": "Age Range",
+      "gender": "Gender",
+      "color": "Color",
+      "sortBy": "Sort By",
+      "sortNewest": "Newest First",
+      "sortPriceLowHigh": "Price: Low to High",
+      "sortPriceHighLow": "Price: High to Low",
+      "sortDistance": "Distance: Nearest First"
+    },
+
+    "accessibility": {
+      "skipToContent": "Skip to main content",
+      "openMenu": "Open navigation menu",
+      "closeMenu": "Close navigation menu",
+      "openSearch": "Open search",
+      "closeSearch": "Close search",
+      "previousImage": "Previous image",
+      "nextImage": "Next image",
+      "enlargeImage": "Enlarge image"
+    }
+  }
+}

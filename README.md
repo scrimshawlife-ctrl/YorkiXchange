@@ -1,4 +1,4 @@
-# YorkiXchange v1
+# YorkiExchange v1
 
 ![Next.js](https://img.shields.io/badge/Next.js-15-black)
 ![TypeScript](https://img.shields.io/badge/TypeScript-5-blue)
@@ -9,7 +9,7 @@
 
 A Yorkie marketplace and forum built with Next.js, Supabase, and shadcn/ui.
 
-[![Deploy to Render](https://render.com/images/deploy-to-render-button.svg)](https://render.com/deploy?repo=https://github.com/<YOUR_GITHUB_HANDLE>/YorkiXchange)
+[![Deploy to Render](https://render.com/images/deploy-to-render-button.svg)](https://render.com/deploy?repo=https://github.com/<YOUR_GITHUB_HANDLE>/YorkiExchange)
 [![Deploy to Azure](https://aka.ms/deploytoazurebutton)](https://portal.azure.com/#create/Microsoft.Template/uri/https%3A%2F%2Fraw.githubusercontent.com%2F<OWNER>%2F<REPO>%2Fmain%2Finfra%2Fmain.bicep)
 
 ## Setup
@@ -33,7 +33,7 @@ A Yorkie marketplace and forum built with Next.js, Supabase, and shadcn/ui.
    NEXT_PUBLIC_APP_ENV=local
    SUPABASE_SERVICE_ROLE_KEY=...
    ```
-   - When deploying to Render, set `NEXT_PUBLIC_SITE_URL` to your Render hostname (e.g., `https://yorkixchange.onrender.com`).
+   - When deploying to Render, set `NEXT_PUBLIC_SITE_URL` to your Render hostname (e.g., `https://yorkiexchange.onrender.com`).
 4. **Run dev server**:
    ```bash
    npm run dev

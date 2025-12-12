@@ -24,7 +24,7 @@ export function MascotBubble({
     >
       <img
         src="/assets/brand/yorkixchange-mark.svg"
-        alt="YorkiXchange Mascot"
+        alt="YorkiExchange Mascot"
         className="inline-block"
         style={{ width: size, height: size }}
         aria-hidden="true"

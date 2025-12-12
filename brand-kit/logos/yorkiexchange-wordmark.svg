@@ -1,0 +1,105 @@
+<svg viewBox="0 0 500 140" xmlns="http://www.w3.org/2000/svg">
+  <title>YorkiExchange Wordmark</title>
+
+  <defs>
+    <!-- Gradient for shield background -->
+    <linearGradient id="wm-shieldGradient" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" style="stop-color:#1F6F9C;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#0E4A6B;stop-opacity:1" />
+    </linearGradient>
+
+    <!-- Fur gradient -->
+    <linearGradient id="wm-furGradient" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" style="stop-color:#F4EFE9;stop-opacity:1" />
+      <stop offset="50%" style="stop-color:#D8B58A;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#C4A574;stop-opacity:1" />
+    </linearGradient>
+  </defs>
+
+  <!-- ICON: Simplified crest -->
+  <g id="crestIcon">
+    <!-- Shield -->
+    <path d="M 60 15 L 105 30 L 105 75 Q 105 105 60 120 Q 15 105 15 75 L 15 30 Z"
+          fill="url(#wm-shieldGradient)"
+          stroke="#0E1A22"
+          stroke-width="2.5"/>
+
+    <!-- Decorative border -->
+    <path d="M 60 22 L 98 35 L 98 75 Q 98 98 60 110 Q 22 98 22 75 L 22 35 Z"
+          fill="none"
+          stroke="#E2B23C"
+          stroke-width="1.5"
+          opacity="0.6"/>
+
+    <!-- Center Yorkie (simplified) -->
+    <circle cx="60" cy="60" r="15" fill="url(#wm-furGradient)" stroke="#0E1A22" stroke-width="2"/>
+
+    <!-- Ears -->
+    <ellipse cx="50" cy="53" rx="6" ry="9" fill="#D8B58A" stroke="#0E1A22" stroke-width="1.5"/>
+    <ellipse cx="70" cy="53" rx="6" ry="9" fill="#D8B58A" stroke="#0E1A22" stroke-width="1.5"/>
+
+    <!-- Muzzle -->
+    <ellipse cx="60" cy="64" rx="9" ry="7" fill="#F4EFE9"/>
+
+    <!-- Eyes -->
+    <circle cx="55" cy="59" r="2.5" fill="#0E1A22"/>
+    <circle cx="55.8" cy="58" r="1" fill="#FFFFFF"/>
+    <circle cx="65" cy="59" r="2.5" fill="#0E1A22"/>
+    <circle cx="65.8" cy="58" r="1" fill="#FFFFFF"/>
+
+    <!-- Nose -->
+    <ellipse cx="60" cy="66.5" rx="1.8" ry="1.5" fill="#0E1A22"/>
+
+    <!-- Smile -->
+    <path d="M 57 69 Q 60 71 63 69" fill="none" stroke="#0E1A22" stroke-width="1.5" stroke-linecap="round"/>
+
+    <!-- Gold collar -->
+    <ellipse cx="60" cy="74" rx="10" ry="2" fill="#E2B23C" stroke="#0E1A22" stroke-width="1"/>
+    <circle cx="60" cy="74" r="1.5" fill="#0E1A22"/>
+
+    <!-- Left peer (tiny) -->
+    <circle cx="35" cy="65" r="8" fill="url(#wm-furGradient)" stroke="#0E1A22" stroke-width="1.2"/>
+    <circle cx="33" cy="64" r="1.5" fill="#0E1A22"/>
+    <circle cx="37" cy="64" r="1.5" fill="#0E1A22"/>
+
+    <!-- Right peer (tiny) -->
+    <circle cx="85" cy="65" r="8" fill="url(#wm-furGradient)" stroke="#0E1A22" stroke-width="1.2"/>
+    <circle cx="83" cy="64" r="1.5" fill="#0E1A22"/>
+    <circle cx="87" cy="64" r="1.5" fill="#0E1A22"/>
+
+    <!-- Trust banner -->
+    <rect x="30" y="95" width="60" height="12" rx="2" fill="#E2B23C" stroke="#0E1A22" stroke-width="1.5"/>
+    <text x="60" y="103.5"
+          font-family="Arial, sans-serif"
+          font-size="7"
+          font-weight="700"
+          fill="#0E1A22"
+          text-anchor="middle"
+          letter-spacing="0.5">
+      TRUSTED
+    </text>
+  </g>
+
+  <!-- WORDMARK TEXT -->
+  <g id="wordmarkText">
+    <!-- "YorkiExchange" -->
+    <text x="140" y="72"
+          font-family="Montserrat, Poppins, Arial, sans-serif"
+          font-size="42"
+          font-weight="600"
+          fill="#0E1A22"
+          letter-spacing="-0.5">
+      YorkiExchange
+    </text>
+
+    <!-- "Marketplace" subtitle -->
+    <text x="140" y="95"
+          font-family="Inter, Arial, sans-serif"
+          font-size="14"
+          font-weight="500"
+          fill="#1F6F9C"
+          letter-spacing="2">
+      MARKETPLACE
+    </text>
+  </g>
+</svg>

@@ -5,7 +5,7 @@ import SiteNav from "@/components/SiteNav";
 import AuthIntegrityGate from "@/components/AuthIntegrityGate";
 
 export const metadata: Metadata = {
-  title: "YorkiXchange - Marketplace",
+  title: "YorkiExchange - Marketplace",
   description: "The friendly marketplace and community for Yorkie lovers. Buy, sell, adopt, and connect with fellow Yorkshire Terrier enthusiasts.",
   icons: {
     icon: "/assets/brand/favicon.svg",
