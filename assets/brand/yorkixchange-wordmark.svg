@@ -1,0 +1,61 @@
+<svg viewBox="0 0 400 100" xmlns="http://www.w3.org/2000/svg">
+  <title>YorkiXchange Wordmark</title>
+
+  <defs>
+    <radialGradient id="coralBg" cx="50%" cy="40%">
+      <stop offset="0%" style="stop-color:#FF8B7E;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#FF6B6B;stop-opacity:1" />
+    </radialGradient>
+    <linearGradient id="furFill" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" style="stop-color:#F6E9D8;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#C4A574;stop-opacity:1" />
+    </linearGradient>
+  </defs>
+
+  <!-- Icon: Simplified yorkie head in circle -->
+  <g id="iconMark">
+    <!-- Background circle -->
+    <circle cx="50" cy="50" r="42" fill="url(#coralBg)"/>
+
+    <!-- Left ear -->
+    <ellipse cx="30" cy="40" rx="10" ry="14" fill="#C4A574" stroke="#1F2328" stroke-width="2"/>
+    <ellipse cx="30" cy="42" rx="6" ry="9" fill="#8B6F47"/>
+
+    <!-- Right ear -->
+    <ellipse cx="70" cy="40" rx="10" ry="14" fill="#C4A574" stroke="#1F2328" stroke-width="2"/>
+    <ellipse cx="70" cy="42" rx="6" ry="9" fill="#8B6F47"/>
+
+    <!-- Head -->
+    <circle cx="50" cy="48" r="24" fill="url(#furFill)" stroke="#1F2328" stroke-width="2"/>
+
+    <!-- Muzzle -->
+    <ellipse cx="50" cy="52" rx="14" ry="11" fill="#F6E9D8"/>
+
+    <!-- Left eye -->
+    <circle cx="43" cy="48" r="4.5" fill="#1F2328"/>
+    <circle cx="44" cy="46.5" r="1.8" fill="#FFFFFF"/>
+
+    <!-- Right eye -->
+    <circle cx="57" cy="48" r="4.5" fill="#1F2328"/>
+    <circle cx="58" cy="46.5" r="1.8" fill="#FFFFFF"/>
+
+    <!-- Nose -->
+    <ellipse cx="50" cy="55" rx="2.5" ry="2" fill="#1F2328"/>
+
+    <!-- Smile -->
+    <path d="M 47 58 Q 50 60 53 58" fill="none" stroke="#1F2328" stroke-width="1.5" stroke-linecap="round"/>
+  </g>
+
+  <!-- Wordmark text -->
+  <g id="wordmark">
+    <!-- "YorkiXchange" -->
+    <text x="110" y="52" font-family="Arial, sans-serif" font-size="36" font-weight="700" fill="#1F2328" letter-spacing="0">
+      YorkiXchange
+    </text>
+
+    <!-- "Marketplace" subtitle -->
+    <text x="110" y="72" font-family="Arial, sans-serif" font-size="14" font-weight="500" fill="#5F6770" letter-spacing="1.5">
+      MARKETPLACE
+    </text>
+  </g>
+</svg>
