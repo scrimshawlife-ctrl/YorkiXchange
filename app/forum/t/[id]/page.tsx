@@ -16,6 +16,7 @@ export default function ThreadPage() {
   const threadId = params.id;
 
   const [session, setSession] = useState<any>(null);
+  const [authReady, setAuthReady] = useState(false);
   const [thread, setThread] = useState<any>(null);
   const [comments, setComments] = useState<Comment[]>([]);
   const [busy, setBusy] = useState(true);
@@ -24,7 +25,17 @@ export default function ThreadPage() {
   const [commentBody, setCommentBody] = useState("");
 
   useEffect(() => {
-    supabase.auth.getSession().then(({ data }) => setSession(data.session ?? null));
+    supabase.auth.getSession().then(({ data }) => {
+      setSession(data.session ?? null);
+      setAuthReady(true);
+    });
+
+    const { data: listener } = supabase.auth.onAuthStateChange((_, nextSession) => {
+      setSession(nextSession ?? null);
+      setAuthReady(true);
+    });
+
+    return () => listener?.subscription.unsubscribe();
   }, []);
 
   useEffect(() => {
@@ -61,8 +72,22 @@ export default function ThreadPage() {
   }, [threadId]);
 
   const postComment = async () => {
+    if (!authReady) {
+      toast.error("Checking session. Please wait.");
+      return;
+    }
+
     if (!session?.user?.id) {
       toast.error("Log in to comment.");
+      return;
+    }
+
+    const emailVerified = Boolean(
+      (session.user as any).email_confirmed_at || (session.user as any).confirmed_at
+    );
+
+    if (!emailVerified) {
+      toast.error("Verify your email to comment.");
       return;
     }
 
@@ -138,7 +163,9 @@ export default function ThreadPage() {
         )}
       </div>
 
-      {session && !thread.is_locked ? (
+      {!authReady ? (
+        <div className="text-sm text-muted-foreground">Checking session…</div>
+      ) : session && !thread.is_locked ? (
         <Card>
           <CardHeader className="font-medium">Add a Comment</CardHeader>
           <CardContent className="space-y-3">

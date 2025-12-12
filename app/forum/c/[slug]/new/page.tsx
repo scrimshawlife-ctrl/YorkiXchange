@@ -14,6 +14,7 @@ export default function NewThreadPage() {
   const slug = params.slug;
 
   const [session, setSession] = useState<any>(null);
+  const [authChecked, setAuthChecked] = useState(false);
   const [category, setCategory] = useState<any>(null);
   const [busy, setBusy] = useState(false);
 
@@ -21,7 +22,17 @@ export default function NewThreadPage() {
   const [body, setBody] = useState("");
 
   useEffect(() => {
-    supabase.auth.getSession().then(({ data }) => setSession(data.session ?? null));
+    supabase.auth.getSession().then(({ data }) => {
+      setSession(data.session ?? null);
+      setAuthChecked(true);
+    });
+
+    const { data: listener } = supabase.auth.onAuthStateChange((_, nextSession) => {
+      setSession(nextSession ?? null);
+      setAuthChecked(true);
+    });
+
+    return () => listener?.subscription.unsubscribe();
   }, []);
 
   useEffect(() => {
@@ -40,6 +51,15 @@ export default function NewThreadPage() {
     if (!session?.user?.id) {
       toast.error("Log in to create threads.");
       router.push("/login");
+      return;
+    }
+
+    const emailVerified = Boolean(
+      (session.user as any).email_confirmed_at || (session.user as any).confirmed_at
+    );
+    if (!emailVerified) {
+      toast.error("Verify your email to post in the forum.");
+      router.push("/settings");
       return;
     }
 
@@ -70,6 +90,14 @@ export default function NewThreadPage() {
     toast.success("Thread created.");
     router.push(`/forum/t/${(data as any).id}`);
   };
+
+  if (!authChecked) {
+    return <div className="text-sm text-muted-foreground">Checking session…</div>;
+  }
+
+  if (!session) {
+    return <div className="text-sm text-muted-foreground">Log in to create threads.</div>;
+  }
 
   return (
     <div className="mx-auto max-w-2xl space-y-4">
