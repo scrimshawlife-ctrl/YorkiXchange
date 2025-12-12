@@ -5,10 +5,12 @@ import { useParams, useRouter } from "next/navigation";
 import { supabase } from "@/lib/supabase/client";
 import { Button } from "@/components/ui/button";
 import { Card, CardHeader, CardContent } from "@/components/ui/card";
+import ImageGallery from "@/components/ImageGallery";
 import { toast } from "sonner";
 
 type Listing = any;
 type Profile = any;
+type ListingImage = any;
 
 export default function ListingDetailPage() {
   const params = useParams<{ id: string }>();
@@ -18,6 +20,7 @@ export default function ListingDetailPage() {
   const [session, setSession] = useState<any>(null);
   const [listing, setListing] = useState<Listing | null>(null);
   const [seller, setSeller] = useState<Profile | null>(null);
+  const [images, setImages] = useState<ListingImage[]>([]);
   const [busy, setBusy] = useState(true);
   const [msgBusy, setMsgBusy] = useState(false);
 
@@ -42,6 +45,7 @@ export default function ListingDetailPage() {
 
       setListing(l as any);
 
+      // Load seller profile
       const { data: p } = await supabase
         .from("profiles")
         .select("id,username,display_name,avatar_url")
@@ -49,6 +53,16 @@ export default function ListingDetailPage() {
         .single();
 
       setSeller((p as any) ?? null);
+
+      // Load images
+      const { data: imgs } = await supabase
+        .from("listing_images")
+        .select("id,url,sort_order")
+        .eq("listing_id", id)
+        .order("sort_order", { ascending: true });
+
+      setImages((imgs as any[]) ?? []);
+
       setBusy(false);
     };
 
@@ -112,6 +126,15 @@ export default function ListingDetailPage() {
         </div>
         <div className="text-lg font-semibold">{money(listing.price_cents)}</div>
       </div>
+
+      {images.length > 0 && (
+        <Card>
+          <CardHeader className="font-medium">Images</CardHeader>
+          <CardContent>
+            <ImageGallery images={images} />
+          </CardContent>
+        </Card>
+      )}
 
       <Card>
         <CardHeader className="font-medium">Description</CardHeader>

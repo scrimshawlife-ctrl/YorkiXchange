@@ -40,7 +40,7 @@ A Yorkie marketplace and forum built with Next.js, Supabase, and shadcn/ui.
 
 - ✅ User authentication (signup/login)
 - ✅ Marketplace listing browse with filters (category, price, search)
-- ✅ Create listings (text-only, images coming in next drop)
+- ✅ Create listings with multi-image upload (max 6 images, 5MB each)
 - ✅ Listing detail pages with seller info
 - ✅ Messaging system with realtime updates
   - Message seller from listing detail
@@ -58,7 +58,10 @@ A Yorkie marketplace and forum built with Next.js, Supabase, and shadcn/ui.
   - Post comments on threads
   - Locked thread support
 - ✅ RLS-secured database with profiles, listings, favorites, threads, comments, messages
-- 🚧 Listing image uploads (next drop)
+- ✅ Listing image uploads with gallery viewer
+  - Multi-image upload to Supabase Storage (listing-images bucket)
+  - Image gallery component with modal lightbox
+  - Navigation controls (prev/next) in full-size view
 
 ## Tech Stack
 
