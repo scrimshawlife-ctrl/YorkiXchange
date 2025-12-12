@@ -16,12 +16,12 @@ export function BrandLogo({
   const getSvgPath = () => {
     switch (variant) {
       case "badge":
-        return "/assets/brand/yorkixchange-badge.svg";
+        return "/assets/brand/yorkiexchange-badge.svg";
       case "mark":
-        return "/assets/brand/yorkixchange-mark.svg";
+        return "/assets/brand/yorkiexchange-mark.svg";
       case "wordmark":
       default:
-        return "/assets/brand/yorkixchange-wordmark.svg";
+        return "/assets/brand/yorkiexchange-wordmark.svg";
     }
   };
 
@@ -39,12 +39,12 @@ export function BrandLogo({
   const getDefaultTitle = () => {
     switch (variant) {
       case "badge":
-        return "YorkiXchange Marketplace Badge";
+        return "YorkiExchange Marketplace Badge";
       case "mark":
-        return "YorkiXchange Mark";
+        return "YorkiExchange Mark";
       case "wordmark":
       default:
-        return "YorkiXchange Marketplace";
+        return "YorkiExchange Marketplace";
     }
   };
 
