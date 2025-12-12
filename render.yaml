@@ -1,0 +1,18 @@
+services:
+  - type: web
+    name: yorkixchange
+    env: docker
+    plan: free
+    dockerfilePath: ./Dockerfile
+    healthCheckPath: /
+    envVars:
+      - key: NEXT_PUBLIC_SUPABASE_URL
+        sync: false
+      - key: NEXT_PUBLIC_SUPABASE_ANON_KEY
+        sync: false
+      - key: NEXT_PUBLIC_SITE_URL
+        sync: false
+      - key: NEXT_PUBLIC_APP_ENV
+        sync: false
+      - key: SUPABASE_SERVICE_ROLE_KEY
+        sync: false

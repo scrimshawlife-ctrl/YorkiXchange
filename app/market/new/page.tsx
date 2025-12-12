@@ -23,6 +23,7 @@ const CATS = [
 export default function NewListingPage() {
   const router = useRouter();
   const [session, setSession] = useState<{ user: { id: string } } | null>(null);
+  const [authChecked, setAuthChecked] = useState(false);
   const [busy, setBusy] = useState(false);
 
   const [title, setTitle] = useState("");
@@ -33,7 +34,17 @@ export default function NewListingPage() {
   const [images, setImages] = useState<File[]>([]);
 
   useEffect(() => {
-    supabase.auth.getSession().then(({ data }) => setSession(data.session ?? null));
+    supabase.auth.getSession().then(({ data }) => {
+      setSession(data.session ?? null);
+      setAuthChecked(true);
+    });
+
+    const { data: listener } = supabase.auth.onAuthStateChange((_, nextSession) => {
+      setSession(nextSession ?? null);
+      setAuthChecked(true);
+    });
+
+    return () => listener?.subscription.unsubscribe();
   }, []);
 
   const handleImageSelect = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -63,6 +74,15 @@ export default function NewListingPage() {
     if (!session?.user?.id) {
       toast.error("Please log in first.");
       router.push("/login");
+      return;
+    }
+
+    const emailVerified = Boolean(
+      (session.user as any).email_confirmed_at || (session.user as any).confirmed_at
+    );
+    if (!emailVerified) {
+      toast.error("Verify your email before posting a listing.");
+      router.push("/settings");
       return;
     }
 
@@ -136,6 +156,14 @@ export default function NewListingPage() {
     toast.success("Listing posted!");
     router.push(`/market/${listingId}`);
   };
+
+  if (!authChecked) {
+    return <div className="text-sm text-muted-foreground">Checking session…</div>;
+  }
+
+  if (!session) {
+    return <div className="text-sm text-muted-foreground">Log in to post a listing.</div>;
+  }
 
   return (
     <div className="mx-auto max-w-xl space-y-3">
