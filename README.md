@@ -10,6 +10,7 @@
 A Yorkie marketplace and forum built with Next.js, Supabase, and shadcn/ui.
 
 [![Deploy to Render](https://render.com/images/deploy-to-render-button.svg)](https://render.com/deploy?repo=https://github.com/scrimshawlife-ctrl/YorkiXchange)
+[![Run on Replit](https://replit.com/badge/github/scrimshawlife-ctrl/YorkiXchange)](https://replit.com/new/github/scrimshawlife-ctrl/YorkiXchange)
 [![Deploy to Azure](https://aka.ms/deploytoazurebutton)](https://portal.azure.com/#create/Microsoft.Template/uri/https%3A%2F%2Fraw.githubusercontent.com%2F<OWNER>%2F<REPO>%2Fmain%2Finfra%2Fmain.bicep)
 
 ## Setup
@@ -85,6 +86,7 @@ A Yorkie marketplace and forum built with Next.js, Supabase, and shadcn/ui.
 - [Security](docs/SECURITY.md)
 - [Contributing](docs/CONTRIBUTING.md)
 - [Deploy to Render](docs/DEPLOY_RENDER.md)
+- [Deploy to Replit](docs/DEPLOY_REPLIT.md)
 - [Deploy to Azure](docs/DEPLOY_AZURE.md)
 
 ## Tech Stack

@@ -1,0 +1,48 @@
+# YorkiExchange Replit Configuration
+
+# Run command - starts the Next.js development server
+run = "npm run dev"
+
+# Entry point
+entrypoint = "app/page.tsx"
+
+# Hidden files
+hidden = [".config", ".git", ".next", "node_modules", ".env"]
+
+# Modules for Nix environment
+modules = ["nodejs-20"]
+
+# Language
+[languages.typescript]
+pattern = "**/*.{ts,tsx}"
+
+[languages.typescript.languageServer]
+start = "typescript-language-server --stdio"
+
+# Environment variables setup
+[env]
+NEXT_TELEMETRY_DISABLED = "1"
+
+# Packager configuration
+[packager]
+language = "nodejs"
+
+[packager.features]
+packageSearch = true
+guessImports = true
+enabledForHosting = false
+
+# LSP configuration
+[nix]
+channel = "stable-23_11"
+
+# Deployment configuration
+[deployment]
+run = ["sh", "-c", "npm run build && npm start"]
+deploymentTarget = "cloudrun"
+ignorePorts = false
+
+# Port configuration
+[[ports]]
+localPort = 3000
+externalPort = 80

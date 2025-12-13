@@ -1,0 +1,42 @@
+# Replit-specific ignore file
+# Files and directories to exclude from Replit's file system
+
+# Dependencies
+node_modules
+npm-debug.log
+yarn-error.log
+
+# Next.js
+.next
+out
+build
+
+# Environment
+.env
+.env.local
+.env.production.local
+.env.development.local
+.env.test.local
+
+# Git
+.git
+.gitignore
+
+# IDE
+.vscode
+.idea
+*.swp
+*.swo
+*~
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Testing
+coverage
+.nyc_output
+
+# Misc
+*.log
+.cache
