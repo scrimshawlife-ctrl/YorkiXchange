@@ -15,7 +15,7 @@ Render uses the repository's `Dockerfile` to build and run the app as a web serv
 ## Steps
 1. Fork or push this repo to GitHub.
 2. Click the Render deploy button, swapping in your repo URL (HTTPS only):
-   [![Deploy to Render](https://render.com/images/deploy-to-render-button.svg)](https://render.com/deploy?repo=https://github.com/<YOUR_GITHUB_HANDLE>/YorkiExchange)
+   [![Deploy to Render](https://render.com/images/deploy-to-render-button.svg)](https://render.com/deploy?repo=https://github.com/scrimshawlife-ctrl/YorkiXchange)
 3. Pick **Docker** when prompted (the `render.yaml` blueprint will pre-fill this) and leave the default build/run commands (Render uses the `Dockerfile`).
 4. Add environment variables. Mark `SUPABASE_SERVICE_ROLE_KEY` as **Secret**. Set `NEXT_PUBLIC_SITE_URL` to your Render hostname (e.g., `https://yorkiexchange.onrender.com`).
 5. Deploy. Render will build the Docker image, run health checks at `/`, and start the service on the port Render assigns via the `PORT` env var.

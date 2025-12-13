@@ -1,6 +1,6 @@
 services:
   - type: web
-    name: yorkixchange
+    name: yorkiexchange
     env: docker
     plan: free
     dockerfilePath: ./Dockerfile
